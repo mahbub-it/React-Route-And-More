@@ -1,85 +1,125 @@
+import React, { useState } from 'react';
+
+const progressItems = [
+  { label: 'Proactively Envisioned', value: 100, gradient: 'linear-gradient(90deg,#6C63FF,#4ECDC4)' },
+  { label: 'Objectively Innovated',  value: 80,  gradient: 'linear-gradient(90deg,#4ECDC4,#6C63FF)' },
+  { label: 'Portalled',              value: 45,  gradient: 'linear-gradient(90deg,#FFD93D,#FF6B6B)' },
+  { label: 'Done',                   value: 35,  gradient: 'linear-gradient(90deg,#FF6B6B,#FFD93D)' },
+];
 
 const RightSidebar = () => {
+  const [formData, setFormData] = useState({ uid: '', pwd: '' });
+
   return (
     <>
-    {/* Right Sidebar Column Start */}
-    {/* Form */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">
-                <span className="glyphicon glyphicon-log-in"></span>
-                Log In
-              </h3>
-            </div>
-            <div className="panel-body">
-              <form>
-                <div className="form-group">
-                  <input type="text" className="form-control" id="uid" name="uid" placeholder="Username" />
-                </div>
-                <div className="form-group">
-                  <input type="password" className="form-control" id="pwd" name="pwd" placeholder="Password" />
-                </div>
-                <button type="submit" className="btn btn-default">Log In</button>
-              </form>
-            </div>
+      {/* Login Card */}
+      <div className="glass-card" style={{ padding: '20px', marginBottom: '20px' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '10px',
+          marginBottom: '16px', paddingBottom: '14px',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <div style={{
+            width: '32px', height: '32px', borderRadius: '8px',
+            background: 'linear-gradient(135deg,#6C63FF,#4ECDC4)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem',
+          }}>
+            🔐
           </div>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: 0 }}>Sign In</h3>
+        </div>
 
-          {/* Progress Bars */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">
-                <span className="glyphicon glyphicon-scale"></span>
-                Dramatically Engage
-              </h3>
-            </div>
-            <div className="panel-body">
-              <div className="progress">
-                <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0"
-                  aria-valuemax="100" style={{ width: "100%" }}>
-                  100% Proactively Envisioned
-                </div>
-              </div>
-              <div className="progress">
-                <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0"
-                  aria-valuemax="100" style={{ width: "80%" }}>
-                  80% Objectively Innovated
-                </div>
-              </div>
-              <div className="progress">
-                <div className="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0"
-                  aria-valuemax="100" style={{ width: "45%" }}>
-                  45% Portalled
-                </div>
-              </div>
-              <div className="progress">
-                <div className="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="35" aria-valuemin="0"
-                  aria-valuemax="100" style={{ width: "35%" }}>
-                  35% Done
-                </div>
-              </div>
-            </div>
-          </div>
+        <form onSubmit={e => e.preventDefault()} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          <input
+            type="text"
+            className="input-v2"
+            id="uid"
+            name="uid"
+            placeholder="Username"
+            value={formData.uid}
+            onChange={e => setFormData(p => ({ ...p, uid: e.target.value }))}
+            autoComplete="username"
+          />
+          <input
+            type="password"
+            className="input-v2"
+            id="pwd"
+            name="pwd"
+            placeholder="Password"
+            value={formData.pwd}
+            onChange={e => setFormData(p => ({ ...p, pwd: e.target.value }))}
+            autoComplete="current-password"
+          />
+          <button type="submit" className="btn-v2 btn-primary-v2" style={{ width: '100%', justifyContent: 'center', marginTop: '4px' }}>
+            🔓 Log In
+          </button>
+        </form>
+      </div>
 
-          {/* Text Panel */}
-          <div className="panel panel-default">
-            <div className="panel-heading">
-              <h3 className="panel-title">
-                <span className="glyphicon glyphicon-bullhorn"></span>
-                Active Predomination
-              </h3>
+      {/* Progress Bars Card */}
+      <div className="glass-card" style={{ padding: '20px', marginBottom: '20px' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '10px',
+          marginBottom: '16px', paddingBottom: '14px',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <div style={{
+            width: '32px', height: '32px', borderRadius: '8px',
+            background: 'linear-gradient(135deg,#FF6B6B,#FFD93D)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem',
+          }}>
+            📊
+          </div>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: 0 }}>Dramatically Engage</h3>
+        </div>
+
+        {progressItems.map((item) => (
+          <div key={item.label} style={{ marginBottom: '14px' }}>
+            <div className="progress-label">
+              <span>{item.label}</span>
+              <span style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{item.value}%</span>
             </div>
-            <div className="panel-body">
-              <p>Proactively envisioned multimedia based expertise and cross-media growth strategies.</p>
-              <div className="btn-group" role="group">
-                <button type="button" className="btn btn-default">Resource</button>
-                <button type="button" className="btn btn-default">Envision</button>
-                <button type="button" className="btn btn-default">Niche</button>
-              </div>
+            <div className="progress-v2">
+              <div
+                className="progress-v2-bar"
+                style={{ width: `${item.value}%`, background: item.gradient }}
+              />
             </div>
           </div>
-          {/* Right Sidebar Column End */}
+        ))}
+      </div>
+
+      {/* Text Panel */}
+      <div className="glass-card" style={{ padding: '20px' }}>
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: '10px',
+          marginBottom: '14px', paddingBottom: '14px',
+          borderBottom: '1px solid rgba(255,255,255,0.07)',
+        }}>
+          <div style={{
+            width: '32px', height: '32px', borderRadius: '8px',
+            background: 'linear-gradient(135deg,#4ECDC4,#6C63FF)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.85rem',
+          }}>
+            📣
+          </div>
+          <h3 style={{ fontSize: '0.95rem', fontWeight: 700, margin: 0 }}>Active Predomination</h3>
+        </div>
+
+        <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem', lineHeight: 1.7, marginBottom: '16px' }}>
+          Proactively envisioned multimedia based expertise and cross-media growth strategies.
+        </p>
+
+        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+          {['Resource', 'Envision', 'Niche'].map(label => (
+            <button key={label} className="btn-v2 btn-ghost-v2" style={{ flex: 1, justifyContent: 'center', padding: '8px 10px', fontSize: '0.8rem', minWidth: '70px' }}>
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default RightSidebar
+export default RightSidebar;

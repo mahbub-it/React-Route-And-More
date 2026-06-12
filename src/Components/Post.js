@@ -1,44 +1,110 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-const Post = (props) => {
+const getInitials = (title = '') =>
+  title.split(' ').slice(0, 2).map(w => w[0]).join('').toUpperCase();
+
+const avatarGradients = [
+  'linear-gradient(135deg, #6C63FF, #4ECDC4)',
+  'linear-gradient(135deg, #FF6B6B, #FFD93D)',
+  'linear-gradient(135deg, #4ECDC4, #6C63FF)',
+];
+
+const Post = ({ title, description, time, comment_count, share_count, index = 0 }) => {
   return (
-    <>
-    {/* Articles */}
-          <div className="row">
-            <article className="col-xs-12">
-              <div className="media">
-                <div className="media-left">
-                  <Link to="/home">
-                    <img className="media-object" src="holder.js/120x120" alt="" />
-                  </Link>
-                </div>
-                <div className="media-body mb-3 pb-3">
-                  <h2 className="media-heading"><Link to="/home">{props.title}</Link></h2>
-                  <p>{props.description}</p>
-                  <p>
-                    <button className='pull-left'>Read More...</button>
-                  </p>
-                  <br /><br />
-                  <p className='pull-right'>
-                    <span className='label label-default'>keyword</span>
-                    <span className='label label-default'>tag</span>
-                    <span className='label label-default'>post</span>
-                  </p>
-                  <ul className="list-inline">
-                    <li>
-                      <Link to="/home">{props.time}</Link>
-                    </li> 
-                    <li><Link to="/home"><span className="glyphicon glyphicon-comment"></span> {props.comment_count} Comments</Link></li>
-                    <li><Link to="/home"><span className="glyphicon glyphicon-share"></span> {props.share_count} Shares</Link></li>
-                  </ul>
-                </div>
-                <hr />
-              </div>
-            </article>
-          </div>
-    </>
-  )
-}
+    <article
+      className="glass-card"
+      style={{ padding: '24px', marginBottom: '20px' }}
+    >
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+        {/* Avatar */}
+        <div
+          style={{
+            width: '52px',
+            height: '52px',
+            borderRadius: '14px',
+            background: avatarGradients[index % avatarGradients.length],
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1rem',
+            fontWeight: 800,
+            color: '#fff',
+            flexShrink: 0,
+            boxShadow: '0 4px 12px rgba(0,0,0,0.3)',
+            letterSpacing: '-0.02em',
+          }}
+        >
+          {getInitials(title)}
+        </div>
 
-export default Post
+        {/* Body */}
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <Link
+            to="/"
+            style={{
+              fontSize: '1.1rem',
+              fontWeight: 700,
+              color: 'var(--text-primary)',
+              textDecoration: 'none',
+              display: 'block',
+              marginBottom: '8px',
+              transition: 'color 0.2s ease',
+            }}
+            onMouseEnter={e => e.currentTarget.style.color = 'var(--primary-light)'}
+            onMouseLeave={e => e.currentTarget.style.color = 'var(--text-primary)'}
+          >
+            {title}
+          </Link>
+
+          <p style={{
+            color: 'var(--text-secondary)',
+            fontSize: '0.9rem',
+            lineHeight: 1.7,
+            marginBottom: '16px',
+          }}>
+            {description}
+          </p>
+
+          {/* Tags */}
+          <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginBottom: '16px' }}>
+            <span className="tag-v2">keyword</span>
+            <span className="tag-v2" style={{ background: 'rgba(78,205,196,0.12)', color: 'var(--accent)', borderColor: 'rgba(78,205,196,0.25)' }}>tag</span>
+            <span className="tag-v2" style={{ background: 'rgba(255,107,107,0.12)', color: 'var(--secondary)', borderColor: 'rgba(255,107,107,0.25)' }}>post</span>
+          </div>
+
+          {/* Meta row */}
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            flexWrap: 'wrap',
+            gap: '10px',
+          }}>
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                🕐 {time}
+              </span>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                💬 {comment_count} Comments
+              </span>
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                🔗 {share_count} Shares
+              </span>
+            </div>
+
+            <Link
+              to="/"
+              className="btn-v2 btn-outline-v2"
+              style={{ padding: '6px 16px', fontSize: '0.8rem' }}
+            >
+              Read More →
+            </Link>
+          </div>
+        </div>
+      </div>
+    </article>
+  );
+};
+
+export default Post;

@@ -1,16 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 const Alart = () => {
-  return (
-    <>
-    {/* Alert */}
-          <div className="alert alert-danger alert-dismissible" role="alert">
-            <button type="button" className="close" data-dismiss="alert" aria-label="Close"><span
-              aria-hidden="true">&times;</span></button>
-            <strong>Synergize:</strong> Seamlessly visualize quality intellectual capital!
-          </div>
-    </>
-  )
-}
+  const [visible, setVisible] = useState(true);
 
-export default Alart
+  if (!visible) return null;
+
+  return (
+    <div className="alert-v2" role="alert">
+      <span className="alert-v2-icon">⚡</span>
+      <span className="alert-v2-text">
+        <strong>Synergize:</strong> Seamlessly visualize quality intellectual capital without superior collaboration!
+      </span>
+      <button
+        className="alert-v2-close"
+        onClick={() => setVisible(false)}
+        aria-label="Dismiss alert"
+      >
+        ×
+      </button>
+    </div>
+  );
+};
+
+export default Alart;
